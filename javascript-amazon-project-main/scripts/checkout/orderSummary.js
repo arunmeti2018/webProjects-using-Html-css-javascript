@@ -4,6 +4,7 @@ import { currencyConversion } from '../utils/money.js'
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
 import { deliveryOptions, getDeliveryOption } from '../../data/deliveryoptions.js'
 import { renderpaymnetSummary } from './paymnetSummary.js'
+import { renderHeaderSummary } from './headerSummary.js'
 
 export function renderOrderSummary() {
 
@@ -125,7 +126,8 @@ export function renderOrderSummary() {
         document.querySelector(`.js-item-container-${productId}`)
           .remove();
         renderpaymnetSummary();
-            
+        renderHeaderSummary();
+
       })
     });
 

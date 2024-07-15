@@ -7,6 +7,7 @@ export function renderpaymnetSummary() {
     let shippingPriceCents = 0;
     let cartQuantity = 0;
     cart.forEach(cartItem => {
+        
         cartQuantity += cartItem.quantity;
         const product = getProduct(cartItem.productId);
         productPriceCents += product.priceCents * cartItem.quantity;
@@ -59,9 +60,7 @@ export function renderpaymnetSummary() {
 
     document.querySelector('.js-payment-summary')
         .innerHTML = paymentSummaryHTML;
-    // for top checkout ( 3 items to make interactive)  and chane value accordingly
-    document.querySelector('.js-checkout-cartQuantity')
-        .innerHTML = `${cartQuantity}`;
+ 
 
 
 }
