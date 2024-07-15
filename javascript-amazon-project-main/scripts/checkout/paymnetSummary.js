@@ -5,9 +5,9 @@ import { currencyConversion } from "../utils/money.js";
 export function renderpaymnetSummary() {
     let productPriceCents = 0;
     let shippingPriceCents = 0;
-
+    let cartQuantity = 0;
     cart.forEach(cartItem => {
-
+        cartQuantity += cartItem.quantity;
         const product = getProduct(cartItem.productId);
         productPriceCents += product.priceCents * cartItem.quantity;
         const deliveryOption = getDeliveryOption(cartItem.deliveryOptionId);
@@ -20,13 +20,14 @@ export function renderpaymnetSummary() {
     const taxCents = totalBeforTaxCents * 0.1;
     const totalCents = totalBeforTaxCents + taxCents;
 
+
     let paymentSummaryHTML = `
       <div class="payment-summary-title">
           Order Summary
         </div>
 
         <div class="payment-summary-row">
-          <div>Items (3):</div>
+          <div>Items (${cartQuantity}):</div>
           <div class="payment-summary-money">$${currencyConversion(productPriceCents)}</div>
         </div>
 
@@ -58,6 +59,9 @@ export function renderpaymnetSummary() {
 
     document.querySelector('.js-payment-summary')
         .innerHTML = paymentSummaryHTML;
+    // for top checkout ( 3 items to make interactive)  and chane value accordingly
+    document.querySelector('.js-checkout-cartQuantity')
+        .innerHTML = `${cartQuantity}`;
 
 
 }

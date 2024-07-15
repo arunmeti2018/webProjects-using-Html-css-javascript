@@ -4,6 +4,7 @@ import { currencyConversion } from '../utils/money.js'
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
 import { deliveryOptions, getDeliveryOption } from '../../data/deliveryoptions.js'
 import { renderpaymnetSummary } from './paymnetSummary.js'
+
 export function renderOrderSummary() {
 
 
@@ -12,15 +13,15 @@ export function renderOrderSummary() {
     let matchingProduct = getProduct(cartItem.productId);
 
 
-    // if (matchingProduct) {
+    if (matchingProduct) {
 
-    const deliveryOptionId = cartItem.deliveryOptionId;
-    let deliveryOption = getDeliveryOption(deliveryOptionId);
-    const today = dayjs();
-    const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
-    const dateString = deliveryDate.format('dddd, MMMM D');
+      const deliveryOptionId = cartItem.deliveryOptionId;
+      let deliveryOption = getDeliveryOption(deliveryOptionId);
+      const today = dayjs();
+      const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
+      const dateString = deliveryDate.format('dddd, MMMM D');
 
-    orderSummaryHTML += `
+      orderSummaryHTML += `
           <div class="cart-item-container js-item-container-${matchingProduct.id} ">
             <div class="delivery-date">
               Delivery date: ${dateString}
@@ -59,7 +60,7 @@ export function renderOrderSummary() {
             </div>
           </div>
         `
-    // }
+    }
 
   });
 
@@ -124,7 +125,7 @@ export function renderOrderSummary() {
         document.querySelector(`.js-item-container-${productId}`)
           .remove();
         renderpaymnetSummary();
-
+            
       })
     });
 
