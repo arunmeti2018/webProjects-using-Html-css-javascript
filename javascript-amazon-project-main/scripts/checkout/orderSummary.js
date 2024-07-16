@@ -87,13 +87,15 @@ export function renderOrderSummary() {
 
 
       const isChecked = deliveryOption.id === cartItem.deliveryOptionId ? 'checked' : '';
-
+      // console.log(matchingProduct.id);
+      // console.log(deliveryOption.id);
       html += `
    
      
       <div class="delivery-option js-delivery-option "
           data-product-id="${matchingProduct.id}" 
           data-delivery-option-id="${deliveryOption.id}" >
+         
 
          <input type="radio" ${isChecked}
           class="delivery-option-input"
@@ -130,18 +132,18 @@ export function renderOrderSummary() {
 
       })
     });
-
-
   document.querySelectorAll('.js-delivery-option')
     .forEach((element) => {
       element.addEventListener('click', () => {
         let productId = element.dataset.productId;
-        let deliveryOptionId = element.dateset.deliveryOptionId;
-        console.log(deliveryOptionId);
         console.log(productId);
+        let deliveryOptionId = element.dataset.deliveryOptionId;
+        console.log(deliveryOptionId);
         updatedeliveryOption(productId, deliveryOptionId)
         renderOrderSummary();
         renderpaymnetSummary();
       });
     });
+
+
 }
