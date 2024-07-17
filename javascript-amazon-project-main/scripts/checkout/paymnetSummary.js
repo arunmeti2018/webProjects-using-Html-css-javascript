@@ -1,28 +1,29 @@
 import { cart } from "../../data/cart.js";
 import { getDeliveryOption } from "../../data/deliveryoptions.js";
-import { getProduct } from '../../data/products.js'
+import { products, getProduct } from '../../data/products.js'
 import { currencyConversion } from "../utils/money.js";
 export function renderpaymnetSummary() {
-    let productPriceCents = 0;
-    let shippingPriceCents = 0;
-    let cartQuantity = 0;
-    cart.forEach(cartItem => {
-        
-        cartQuantity += cartItem.quantity;
-        const product = getProduct(cartItem.productId);
-        productPriceCents += product.priceCents * cartItem.quantity;
-        const deliveryOption = getDeliveryOption(cartItem.deliveryOptionId);
-        shippingPriceCents += deliveryOption.deliveryPriceCent;
+  let productPriceCents = 0;
+  let shippingPriceCents = 0;
+  let cartQuantity = 0;
+  cart.forEach(cartItem => {
+
+    cartQuantity += cartItem.quantity;
+  
+    const product = getProduct(cartItem.productId);
+
+    productPriceCents += product.priceCents * cartItem.quantity;
+    const deliveryOption = getDeliveryOption(cartItem.deliveryOptionId);
 
 
-    });
+  });
 
-    const totalBeforTaxCents = productPriceCents + shippingPriceCents;
-    const taxCents = totalBeforTaxCents * 0.1;
-    const totalCents = totalBeforTaxCents + taxCents;
+  const totalBeforTaxCents = productPriceCents + shippingPriceCents;
+  const taxCents = totalBeforTaxCents * 0.1;
+  const totalCents = totalBeforTaxCents + taxCents;
 
 
-    let paymentSummaryHTML = `
+  let paymentSummaryHTML = `
       <div class="payment-summary-title">
           Order Summary
         </div>
@@ -58,9 +59,9 @@ export function renderpaymnetSummary() {
     `;
 
 
-    document.querySelector('.js-payment-summary')
-        .innerHTML = paymentSummaryHTML;
- 
+  document.querySelector('.js-payment-summary')
+    .innerHTML = paymentSummaryHTML;
+
 
 
 }

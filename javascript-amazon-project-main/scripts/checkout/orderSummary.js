@@ -1,4 +1,4 @@
-import { cart, deleteFromCart, updatedeliveryOption } from '../../data/cart.js'
+import { cart, deleteFromCart, getCartQuantity, updatedeliveryOption } from '../../data/cart.js'
 import { products, getProduct } from '../../data/products.js'
 import { currencyConversion } from '../utils/money.js'
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
@@ -39,13 +39,18 @@ export function renderOrderSummary() {
                 <div class="product-price">
                   $${(matchingProduct.priceCents / 100).toFixed(2)}
                 </div>
-                <div class="product-quantity">
-                  <span>
-                    Quantity: <span class="quantity-label">${cartItem.quantity}</span>
+                <div class="product-quantity>
+              
+                    Quantity:
+                   <span class="quantity-label product-quantity-container"> 
+                        <button class="quantity-decrement " 
+                        onclick="${updateCartQuantity(cartItem, '-')}">-</button>
+                        <span class="quantity-value js-quantity-${cartItem.productId}">${cartItem.quantity}</span>
+                        <button class="quantity-increment"
+                       onclick="${updateCartQuantity(cartItem, '+')}" >+</button>
+                 
                   </span>
-                  <span class="update-quantity-link link-primary">
-                    Update
-                  </span>
+               
                   <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
                     Delete
                   </span>
@@ -87,8 +92,7 @@ export function renderOrderSummary() {
 
 
       const isChecked = deliveryOption.id === cartItem.deliveryOptionId ? 'checked' : '';
-      // console.log(matchingProduct.id);
-      // console.log(deliveryOption.id);
+
       html += `
    
      
@@ -132,13 +136,16 @@ export function renderOrderSummary() {
 
       })
     });
+
+
   document.querySelectorAll('.js-delivery-option')
     .forEach((element) => {
+
       element.addEventListener('click', () => {
         let productId = element.dataset.productId;
-        console.log(productId);
+
         let deliveryOptionId = element.dataset.deliveryOptionId;
-        console.log(deliveryOptionId);
+
         updatedeliveryOption(productId, deliveryOptionId)
         renderOrderSummary();
         renderpaymnetSummary();
@@ -146,4 +153,24 @@ export function renderOrderSummary() {
     });
 
 
+
+
+  function updateCartQuantity(cartItem, operation) {
+    // console.log(cartItem);
+    // console.log(operation);
+
+    if (operation === '-') {
+      cartItem.quantity -= 1;
+
+    }
+    else if (operation === '+') {
+      cartItem.quantity += 1;
+
+    }
+
+
+    document.querySelector(`.js-quantity-${cartItem.productId}`);
+
+
+  }
 }
