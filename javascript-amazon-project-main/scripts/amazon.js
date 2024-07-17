@@ -1,8 +1,8 @@
 import { cart, addToCart } from '../data/cart.js'
-import { products } from '../data/products.js'
+import { products, loadProducts } from '../data/products.js'
 import { currencyConversion } from './utils/money.js'
 
-// loadProducts(renderProductsGrid);
+loadProducts(renderProductsGrid);
 renderProductsGrid();
 function renderProductsGrid() {
 
