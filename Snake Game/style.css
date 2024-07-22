@@ -42,3 +42,50 @@ body {
     overflow: hidden;
 
 }
+
+.play-board .food {
+    background: #FF003D;
+}
+
+.play-board .head {
+    background: #60CBFF;
+}
+
+.controls {
+    display: none;
+
+    justify-content: space-between;
+}
+
+.controls i {
+    color: #B8c6DC;
+    padding: 25px 0;
+    text-align: center;
+    font-size: 1.3rem;
+    cursor: pointer;
+    width: calc(100%/4);
+    border-right: 1px solid #171b26;
+
+}
+
+@media screen and (max-width:550px) {
+    .wrapper {
+        width: 95vmin;
+        height: 115vmin;
+    }
+
+    .controls {
+        display: flex;
+    }
+
+    .controls i {
+        padding: 15px 0;
+    }
+
+    .game-details {
+        padding: 15px 27px;
+        font-size: 1rem;
+
+    }
+
+}
