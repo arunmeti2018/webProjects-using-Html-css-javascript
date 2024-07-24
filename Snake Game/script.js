@@ -20,7 +20,8 @@ function snakeGame() {
     }
     function handleGameOver() {
         clearInterval(setIntervalId);
-        alert("Game Over Press OK to Replay... ");
+        alert(`Game Over , Your Score :${score}
+            Press OK to Replay... `);
         location.reload();
     }
     const changeDirection = (e) => {
